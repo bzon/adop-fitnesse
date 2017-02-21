@@ -44,9 +44,8 @@ COPY resources/Frontpage_content.txt FitNesseRoot/FrontPage/content.txt
 
 # Deploy Petclinic sample tests
 RUN cd /tmp && git clone https://github.com/bzon/petclinic-fitnesse-test && \
-    echo '!contents -R2 -g -p -f -h' > $FITNESSE_HOME/FitNesseRoot/PetClinic.wiki && \
     mkdir -p FITNESSE_HOME/FitNesseRoot/PetClinic && \
-    mv /tmp/petclinic-fitnesse-test $FITNESSE_HOME/FitNesseRoot/PetClinic
+    mv /tmp/petclinic-fitnesse-test/ $FITNESSE_HOME/FitNesseRoot/PetClinic/ 
 
 # Clean up
 RUN rm -fr /tmp/**

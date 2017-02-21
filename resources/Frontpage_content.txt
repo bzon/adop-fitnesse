@@ -1,7 +1,7 @@
 !1 Welcome to [[FitNesse][FitNesse.FitNesse]]!
 !3 ''The fully integrated stand-alone acceptance testing framework and wiki.''
 
-!3 Go to the Accenture DevOps Platform [[Pet Clinic][.PetClinic]] Sample project!
+!3 Go to the Accenture !-DevOps-! Platform [[Pet Clinic][.PetClinic]] Sample project!
 
 |'''To Learn more...'''                                                                                    |
 |[[User Guide][.FitNesse.UserGuide]]                           |''Answer the rest of your questions here.''|
