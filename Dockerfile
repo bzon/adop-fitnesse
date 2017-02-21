@@ -4,7 +4,7 @@ ENV FITNESSE_HOME=/opt/fitnesse
 
 WORKDIR $FITNESSE_HOME
 
-RUN apk add --no-cache wget unzip
+RUN apk add --no-cache wget unzip git rsync
 
 # Install Fitnesse HSAC Plugin
 RUN wget "https://github.com/fhoeben/hsac-fitnesse-fixtures/releases/download/2.11.0/hsac-fitnesse-fixtures-2.11.0-standalone.zip" && \
@@ -41,6 +41,12 @@ COPY resources/Jdbc_installation_doc_content.txt FitNesseRoot/PlugIns/JdbcSlim/I
 
 # Copy custom Front Page contents
 COPY resources/Frontpage_content.txt FitNesseRoot/FrontPage/content.txt
+
+# Deploy Petclinic sample tests
+RUN cd /tmp && git clone https://github.com/bzon/petclinic-fitnesse-test && \
+    echo '!contents -R2 -g -p -f -h' > $FITNESSE_HOME/FitNesseRoot/PetClinic.wiki && \
+    mkdir -p FITNESSE_HOME/FitNesseRoot/PetClinic && \
+    mv /tmp/petclinic-fitnesse-test $FITNESSE_HOME/FitNesseRoot/PetClinic
 
 # Clean up
 RUN rm -fr /tmp/**
