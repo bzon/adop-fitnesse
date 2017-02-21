@@ -1,0 +1,20 @@
+!1 Welcome to [[FitNesse][FitNesse.FitNesse]]!
+!3 ''The fully integrated stand-alone acceptance testing framework and wiki.''
+
+!3 Go to the Accenture DevOps Platform [[Pet Clinic][.PetClinic]] Sample project!
+
+|'''To Learn more...'''                                                                                    |
+|[[User Guide][.FitNesse.UserGuide]]                           |''Answer the rest of your questions here.''|
+|[[A Two-Minute Example][.FitNesse.UserGuide.TwoMinuteExample]]|''A brief example. Read this one next.''   |
+|[[Acceptance Tests][.FitNesse.SuiteAcceptanceTests]]          |''FitNesse's suite of Acceptance Tests''   |
+|[[Release Notes][.FitNesse.ReleaseNotes]]                     |''Find out about FitNesse's new features'' |
+
+|'''Plugins Documentation'''                                                                                   |
+|[[JDBC SLIM][.PlugIns.JdbcSlim]]               |''Execute SQL Queries into Slim FitNesse testing''|
+|[[HSAC Acceptance Tests][.HsacAcceptanceTests]]|''Browser and Http Testing Example''                          |
+|[[HSAC Examples][.HsacExamples]]               |''Browser and Http Testing Documentation and Examples''       |
+
+!note Release ${FITNESSE_VERSION}
+
+
+
