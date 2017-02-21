@@ -1,0 +1,64 @@
+version: '2'
+
+networks:
+  &network fitnessenet:
+    driver: bridge
+
+services:
+  fitnesse:
+    restart: always
+    image: bzon/adop-fitnesse:latest
+    ports:
+      - "8080:80"
+    networks:
+      - *network
+
+  petclinic:
+    restart: always
+    image: migueltanada/petclinic:latest
+    ports:
+      - "9966:9966"
+    networks:
+      - *network
+
+  mysql:
+    restart: always
+    image: mysql:5.7.8
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: "petclinic"
+      MYSQL_ROOT_PASSWORD: "petclinic"
+    networks:
+      - *network
+
+  selenium-hub:
+    restart: always
+    image: selenium/hub:2.53.0
+    ports:
+      - "4444:4444"
+    networks:
+      - *network
+
+  selenium-node-chrome:
+    restart: always
+    image: selenium/node-chrome:2.53.0
+    environment:
+      SE_OPTS: "-nodeConfig /var/selenium-config/config-chrome.json"
+      REMOTE_HOST: "http://selenium-node-chrome:5555"
+      HUB_PORT_4444_TCP_ADDR: "selenium-hub"
+      HUB_PORT_4444_TCP_PORT: "4444"
+    networks:
+      - *network
+
+  selenium-node-firefox:
+    restart: always
+    image: selenium/node-firefox:2.53.0
+    environment:
+      SE_OPTS: "-nodeConfig /var/selenium-config/config-firefox.json"
+      REMOTE_HOST: "http://selenium-node-firefox:5555"
+      HUB_PORT_4444_TCP_ADDR: "selenium-hub"
+      HUB_PORT_4444_TCP_PORT: "4444"
+    networks:
+      - *network
+
