@@ -43,9 +43,9 @@ COPY resources/Jdbc_installation_doc_content.txt FitNesseRoot/PlugIns/JdbcSlim/I
 COPY resources/Frontpage_content.txt FitNesseRoot/FrontPage/content.txt
 
 # Deploy Petclinic sample tests
-RUN cd /tmp && git clone https://github.com/bzon/petclinic-fitnesse-test && \
-    mkdir -p FITNESSE_HOME/FitNesseRoot/PetClinic && \
-    mv /tmp/petclinic-fitnesse-test/ $FITNESSE_HOME/FitNesseRoot/PetClinic/ 
+RUN cd /tmp && git clone https://github.com/bzon/PetClinicFitnesseSamples.git && \
+    mkdir -p FITNESSE_HOME/FitNesseRoot/PetClinicFitnesseSamples && \
+    mv /tmp/petclinic-fitnesse-test/ $FITNESSE_HOME/FitNesseRoot/PetClinicFitnesseSamples/ 
 
 # Clean up
 RUN rm -fr /tmp/**
