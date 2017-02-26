@@ -5,6 +5,14 @@ networks:
     driver: bridge
 
 services:
+  fitnesse:
+    restart: always
+    image: bzon/adop-fitnesse:latest
+    ports:
+      - "2222:8080"
+    networks:
+      - *network
+
   selenium-hub:
     restart: always
     image: selenium/hub:2.53.0
@@ -17,7 +25,7 @@ services:
     restart: always
     image: selenium/node-chrome:2.53.0
     environment:
-      SE_OPTS: "-nodeConfig /var/selenium-config/config-chrome.json"
+      SE_OPTS: "-nodeConfig /var/selenium-config/config-chrome.json -browserTimeout 86400 -timeout 86400"
       REMOTE_HOST: "http://selenium-node-chrome:5555"
       HUB_PORT_4444_TCP_ADDR: "selenium-hub"
       HUB_PORT_4444_TCP_PORT: "4444"
@@ -28,7 +36,7 @@ services:
     restart: always
     image: selenium/node-firefox:2.53.0
     environment:
-      SE_OPTS: "-nodeConfig /var/selenium-config/config-firefox.json"
+      SE_OPTS: "-nodeConfig /var/selenium-config/config-firefox.json -browserTimeout 86400 -timeout 86400"
       REMOTE_HOST: "http://selenium-node-firefox:5555"
       HUB_PORT_4444_TCP_ADDR: "selenium-hub"
       HUB_PORT_4444_TCP_PORT: "4444"
