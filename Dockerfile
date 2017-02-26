@@ -1,4 +1,4 @@
-FROM java:8-jre-alpine
+FROM openjdk:8-jdk-alpine
 
 RUN apk add --no-cache git unzip wget curl bash ttf-dejavu coreutils
 
@@ -15,8 +15,6 @@ ARG gid=1000
 RUN addgroup -g ${gid} ${group} \
     && adduser -h "$FITNESSE_HOME" -u ${uid} -G ${group} -s /bin/bash -D ${user}
 
-VOLUME /var/fitnesse_home
-
 ENV TINI_VERSION 0.13.2
 ENV TINI_SHA afbf8de8a63ce8e4f18cb3f34dfdbbd354af68a1
 
@@ -29,7 +27,7 @@ RUN curl -fsSL https://github.com/krallin/tini/releases/download/v${TINI_VERSION
 # We need to mount the whole installation content of FITNESSE_HOME to local directory for user convenience
 WORKDIR /usr/share/fitnesse/ref
 
-# Install Fitnesse HSAC Plugin
+# Install Fitnesse with HSAC preconfigured by fhoeben
 RUN wget "https://github.com/fhoeben/hsac-fitnesse-fixtures/releases/download/2.11.0/hsac-fitnesse-fixtures-2.11.0-standalone.zip" && \
     unzip hsac-fitnesse-fixtures-2.11.0-standalone.zip && \
     rm -fr hsac-fitnesse-fixtures-2.11.0-standalone.zip
@@ -59,16 +57,16 @@ RUN wget "https://github.com/six42/jdbcslim/archive/v1.0.1.zip" && \
     mv jdbcslim-1.0.1/FitNesseRoot/PlugIns FitNesseRoot/ && \
     rm -fr v1.0.1.zip jdbcslim-1.0.1
 
+# Deploy Petclinic sample tests
+RUN cd /tmp && git clone https://github.com/bzon/PetClinicFitnesseSamples.git && \
+    mkdir -p FitNesseRoot/PetClinicFitnesseSamples && \
+    mv /tmp/PetClinicFitnesseSamples /usr/share/fitnesse/ref/FitNesseRoot/PetClinicFitnesseSamples/ 
+
 # Fix JDBC Documentation Installation wiki windows path by overwriting with the correct contents
 COPY resources/Jdbc_installation_doc_content.txt FitNesseRoot/PlugIns/JdbcSlim/Installation/content.txt
 
 # Copy custom Front Page contents
 COPY resources/Frontpage_content.txt FitNesseRoot/FrontPage/content.txt
-
-# Deploy Petclinic sample tests
-RUN cd /tmp && git clone https://github.com/bzon/PetClinicFitnesseSamples.git && \
-    mkdir -p REF_CONFIG_DIR/FitNesseRoot/PetClinicFitnesseSamples && \
-    mv /tmp/PetClinicFitnesseSamples /usr/share/fitnesse/ref/FitNesseRoot/PetClinicFitnesseSamples/ 
 
 RUN chown -R ${user} "$FITNESSE_HOME" "/usr/share/fitnesse/ref"
 
@@ -80,6 +78,7 @@ EXPOSE 8080
 
 USER ${user}
 
-COPY resources/fitnesse.sh /usr/local/bin/fitnesse.sh
+WORKDIR $FITNESSE_HOME
 
+COPY resources/fitnesse.sh /usr/local/bin/fitnesse.sh
 ENTRYPOINT ["/bin/tini","--","/usr/local/bin/fitnesse.sh"]
