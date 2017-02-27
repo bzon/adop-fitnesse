@@ -1,0 +1,8 @@
+#!/bin/bash -e
+
+if [ ${#@} -lt 1 ]; then
+  docker-compose -h
+  exit 1
+fi
+
+docker-compose -f docker-compose.yml -f petclinic-compose.yml ${@}
