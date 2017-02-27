@@ -59,8 +59,7 @@ RUN wget "https://github.com/six42/jdbcslim/archive/v1.0.1.zip" && \
 
 # Deploy Petclinic sample tests
 RUN cd /tmp && git clone https://github.com/bzon/PetClinicFitnesseSamples.git && \
-    mkdir -p FitNesseRoot/PetClinicFitnesseSamples && \
-    mv /tmp/PetClinicFitnesseSamples /usr/share/fitnesse/ref/FitNesseRoot/PetClinicFitnesseSamples/ 
+    mv /tmp/PetClinicFitnesseSamples /usr/share/fitnesse/ref/FitNesseRoot/
 
 # Fix JDBC Documentation Installation wiki windows path by overwriting with the correct contents
 COPY resources/Jdbc_installation_doc_content.txt FitNesseRoot/PlugIns/JdbcSlim/Installation/content.txt
