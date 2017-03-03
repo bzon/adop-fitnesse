@@ -9,7 +9,7 @@ Since not all users may be able to run docker on their machine. This manual is f
 **Git Bash**, I recommend users to download and install Git Bash by following this [guide](https://openhatch.org/missions/windows-setup/install-git-bash).
 
 
-**Babun**, Heavy unix shell users will love to install (babun)[http://babun.github.io/).
+**Babun**, Heavy unix shell users will love to install (babun)[http://babun.github.io/].
 
 
 **Java 7** or higher. Either JRE or JDK is fine.
@@ -23,7 +23,8 @@ Create your preferred installation directory. Example: /c/FitNesse
 mkdir /c/FitNesse
 ```
 
-Install [HSAC with FitNesse standalone bundle](https://github.com/fhoeben/hsac-fitnesse-fixtures). You can download the latest release [here](https://github.com/fhoeben/hsac-fitnesse-fixtures/releases).
+Install [HSAC with FitNesse standalone bundle](https://github.com/fhoeben/hsac-fitnesse-fixtures). 
+You can download the latest release [here](https://github.com/fhoeben/hsac-fitnesse-fixtures/releases).  
 Unzip the downloaded zip file in your installation directory `/c/FitNesse`.  Remove the zip file after installation.  
 ```bash
 wget "https://github.com/fhoeben/hsac-fitnesse-fixtures/releases/download/2.11.0/hsac-fitnesse-fixtures-2.11.0-standalone.zip"
