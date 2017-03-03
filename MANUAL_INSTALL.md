@@ -9,7 +9,7 @@ Since not all users may be able to run docker on their machine. This manual is f
 **Git Bash**, I recommend users to download and install Git Bash by following this [guide](https://openhatch.org/missions/windows-setup/install-git-bash).
 
 
-**Babun**, Heavy unix shell users will love to install (babun)[http://babun.github.io/].
+**Babun**, Heavy unix shell users will love to install [babun](http://babun.github.io/).
 
 
 **Java 7** or higher. Either JRE or JDK is fine.
