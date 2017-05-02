@@ -1,0 +1,36 @@
+version: '2'
+
+networks:
+  &network fitnessenet:
+    driver: bridge
+
+services:
+
+  selenium-hub:
+    restart: always
+    image: selenium/hub:3.4.0
+    ports:
+      - "4444:4444"
+    networks:
+      - *network
+
+  selenium-node-chrome:
+    restart: always
+    image: selenium/node-chrome:3.4.0
+    environment:
+      SE_OPTS: "-browserTimeout 86400 -timeout 86400 -host selenium-node-chrome  -port 5555"
+      HUB_PORT_4444_TCP_ADDR: "selenium-hub"
+      HUB_PORT_4444_TCP_PORT: "4444"
+    networks:
+      - *network
+
+  selenium-node-firefox:
+    restart: always
+    image: selenium/node-firefox:3.4.0
+    environment:
+      SE_OPTS: "-browserTimeout 86400 -timeout 86400 -host selenium-node-firefox -port 5555"
+      HUB_PORT_4444_TCP_ADDR: "selenium-hub"
+      HUB_PORT_4444_TCP_PORT: "4444"
+    networks:
+      - *network
+
